@@ -25,11 +25,11 @@ cdef class PQ:
 		enqueue(&self.front, &self.rear, data, priority)
 
 		
-	cpdef str exec_task(self):
+	cpdef str pop(self):
 		cdef char *x
 		x = execute(&self.front, &self.rear)
 		return x.decode()
 		
 		
-	cpdef void display_pq(self):
+	cpdef void display(self):
 		display(self.front, self.rear)

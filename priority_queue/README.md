@@ -9,51 +9,51 @@ In a python session, let's try the module
 ```python
 >>> import cpq
 >>> pq = cpq.PQ()
->>> pq.display_pq()
+>>> pq.display()
 
         The queue is Empty
+
 >>> pq.push(b"exercise", 3)
 >>> pq.push(b"sleep", 2)
 >>> pq.push(b"repeat", 1)
 >>> pq.push(b"code", 5)
->>> pq.display_pq()
+>>> pq.display()
 (
-        {'task': code, 'priority': 5}
-        {'task': exercise, 'priority': 3}
-        {'task': sleep, 'priority': 2}
-        {'task': repeat, 'priority': 1}
+        {code, 5}
+        {exercise, 3}
+        {sleep, 2}
+        {repeat, 1}
 )
->>> pq.exec_task()
+>>> pq.pop()
 
-Task (code) with priority (5) has been removed
+(code) with priority (5) has been removed
 'code'
->>> pq.display_pq()
+>>> pq.display()
 (
-        {'task': exercise, 'priority': 3}
-        {'task': sleep, 'priority': 2}
-        {'task': repeat, 'priority': 1}
+        {exercise, 3}
+        {sleep, 2}
+        {repeat, 1}
 )
->>> pq.exec_task()
+>>> pq.pop()
 
-Task (exercise) with priority (3) has been removed
+(exercise) with priority (3) has been removed
 'exercise'
->>> pq.exec_task()
+>>> pq.pop()
 
-Task (sleep) with priority (2) has been removed
+(sleep) with priority (2) has been removed
 'sleep'
->>> pq.exec_task()
+>>> pq.pop()
 
-Task (repeat) with priority (1) has been removed
+(repeat) with priority (1) has been removed
 'repeat'
->>> pq.exec_task()
+>>> pq.pop()
 
         The queue is empty
 
 ''
->>> pq.display_pq()
+>>> pq.display()
 
         The queue is Empty
->>> quit()
 ```
 
 It is working fine!

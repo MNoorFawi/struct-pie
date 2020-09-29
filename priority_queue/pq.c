@@ -63,7 +63,7 @@ char * execute(pq ** front, pq ** rear) {
     if ( * rear == temp)
       *
       rear = ( * rear) -> next; // to make *rear NULL
-    printf("\nTask (%s) with priority (%i) has been removed\n",
+    printf("\n(%s) with priority (%i) has been removed\n",
       s, p);
     free(temp);
   }
@@ -72,11 +72,11 @@ char * execute(pq ** front, pq ** rear) {
 
 void display(pq * front, pq * rear) {
   if ((front == rear) && (rear == NULL)) {
-    puts("\n\tThe queue is Empty");
+    puts("\n\tThe queue is Empty\n");
   } else {
     puts("(");
     do {
-      printf("\t{'task': %s, 'priority': %i}\n", front -> data, front -> priority);
+      printf("\t{%s, %i}\n", front -> data, front -> priority);
       front = front -> next;
     } while (front != rear -> next);
     puts(")");
