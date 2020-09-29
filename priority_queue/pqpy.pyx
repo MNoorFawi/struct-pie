@@ -1,5 +1,3 @@
-DEF STRLEN=20
-
 cdef extern from "pq.h":
 	
 	cdef struct linked_queue:
@@ -35,7 +33,3 @@ cdef class PQ:
 		
 	cpdef void display_pq(self):
 		display(self.front, self.rear)
-
-		
-	
-	
