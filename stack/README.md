@@ -1,4 +1,4 @@
-# LIFO Stack
+# LIFO & FIFO Stack
 
 Create the python module from C scripts
 ```bash
@@ -22,23 +22,33 @@ st.length()
 st.display()
 # 13 11 19 91
 st.pop()
-# Value 91 is popped from stack
+# 91
 st.display()
 # 13 11 19
 st.length()
 # 3
 st.empty()
-# 0
+# False
+st.popleft()
+# 13
+st.popleft()
+# 11
 st.pop()
-# Value 19 is popped from stack
-st.pop()
-# Value 11 is popped from stack
-st.pop()
-# Value 13 is popped from stack
+# 19
 st.empty()
-# 1
+# True
 st.length()
 # 0
+st.pop()
+
+#         STACK IS EMPTY
+
+#-1
+st.popleft()
+
+#         STACK IS EMPTY
+
+#-1 
 ```
 
 It is working fine!
