@@ -44,3 +44,8 @@ void print_stack(stack * st) {
   }
   printf("\n");
 }
+
+// length
+int len(stack *st){
+  return st->size;
+}

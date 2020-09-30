@@ -13,3 +13,4 @@ int is_empty(stack *st);
 void push(stack *st, int new_val);
 void pop(stack *st);
 void print_stack(stack *st);
+int len(stack *st);
