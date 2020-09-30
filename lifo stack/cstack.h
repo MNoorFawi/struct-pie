@@ -1,4 +1,4 @@
-#define INIT_SIZE 100
+#define INIT_SIZE 1000000
 
 // initialize a stack (LIFO)
 struct stck{
