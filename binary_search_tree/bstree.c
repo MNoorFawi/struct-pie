@@ -61,7 +61,6 @@ void insert(tn ** root, int indx, char * name, float ratio) {
       tree2 -> left = tree2 -> right = NULL;
     }
   }
-  //return root; // return the root to be able to keep track of all the tree
 }
 
 // iterative inorder traversal with a stack (non-recursive)
