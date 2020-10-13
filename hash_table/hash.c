@@ -44,7 +44,7 @@ void insert(ht * table, int value) {
   ls * temp = malloc(sizeof(ls)); // construct a slot
   temp -> value = value; // insert the value in the slot
   temp -> next = table -> slot_array[index]; // the slot will point to the current index slot
-  table -> slot_array[index] = temp; // the given value is inserted into the slot and it is pointing to its chain
+  table -> slot_array[index] = temp; // the index now contains the new value struct which is pointing to its neighbor in the index chain
 }
 
 // delete value i.e. empty the index in the table
