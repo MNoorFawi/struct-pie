@@ -74,7 +74,7 @@ int delete_val(ht * table, int value) {
 void print_hash(ht * table, int size) {
   int i;
   for (i = 0; i < table -> size; ++i) {
-    printf("\nkey(%d): ", i);
+    printf("\nindex(%d): ", i);
     ls * val = table -> slot_array[i];
     while (val) {
       printf(" %d ", val -> value);
