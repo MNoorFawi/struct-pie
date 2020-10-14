@@ -10,6 +10,7 @@ typedef struct list_slot ls;
 struct hash_table {
   int size;
   ls ** slot_array; // double pointer to point to array
+  int filled;
 };
 
 typedef struct hash_table ht;
@@ -21,3 +22,5 @@ int search_by_index(ht * table, int ind);
 void insert(ht * htable, int value);
 int delete_val(ht * table, int value);
 void print_hash(ht * table, int size);
+int filled_indices(ht * table);
+int len(ht * table);

@@ -9,6 +9,7 @@ unsigned int hash_func(int key, int table_size) {
 ht * hash_init(int size) {
   ht * table = malloc(sizeof(ht)); // empty table
   table -> size = size;
+  table -> filled = 0;
   table -> slot_array = (ls ** ) malloc(table -> size * sizeof(ls * )); // pointer to a struct pointer
   /* slot_array will contain the chain of the slots of each index
 each slot_array[i] will have linked lists pointing to each other */
@@ -41,10 +42,14 @@ int search_by_index(ht * table, int ind) {
 // insert new value into the table
 void insert(ht * table, int value) {
   int index = hash_func(value, table -> size); // create index for given value
+  if (table -> slot_array[index] == NULL) // an empty index is filled
+    table -> filled++;
   ls * temp = malloc(sizeof(ls)); // construct a slot
   temp -> value = value; // insert the value in the slot
   temp -> next = table -> slot_array[index]; // the slot will point to the current index slot
-  table -> slot_array[index] = temp; // the index now contains the new value struct which is pointing to its neighbor in the index chain
+  table -> slot_array[index] = temp;
+  /* the index now contains the new value struct 
+  which is pointing to its neighbor in the index chain */
 }
 
 // delete value i.e. empty the index in the table
@@ -54,6 +59,8 @@ int delete_val(ht * table, int value) {
   current_slot = table -> slot_array[index]; // index's slot
 
   if (current_slot && current_slot -> value == value) { // if found in current slot
+    if (!current_slot -> next) // filled index will become empty
+      table -> filled--;
     table -> slot_array[index] = current_slot -> next; // replace current slot in the index with its next
     free(current_slot); // delete current slot
     return 1; // deleted (true)
@@ -82,4 +89,12 @@ void print_hash(ht * table, int size) {
     }
   }
   puts("");
+}
+
+int filled_indices(ht * table) {
+  return table -> filled;
+}
+
+int len(ht * table) {
+  return table -> size;
 }

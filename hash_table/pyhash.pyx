@@ -10,6 +10,7 @@ cdef extern from "hash.h":
 	cdef struct hash_table:
 		int size
 		ls ** slot_array
+		int filled
 
 	ctypedef hash_table ht
 
@@ -19,10 +20,13 @@ cdef extern from "hash.h":
 	void insert(ht * htable, int value)
 	int delete_val(ht * table, int value)
 	void print_hash(ht * table, int size)
+	int filled_indices(ht * table)
+	int len(ht * table)
 
 cdef class HashTable:
 	cdef ht * hash
 	cdef int size
+	cdef int filled
 
 	def __cinit__(self, int table_size):
 		self.size = table_size
@@ -42,3 +46,9 @@ cdef class HashTable:
 
 	cpdef int search_by_index(self, int ind):
 		return search_by_index(self.hash, ind)
+		
+	cpdef int length(self):
+		return len(self.hash)
+		
+	cpdef int occupied(self):
+		return filled_indices(self.hash)
