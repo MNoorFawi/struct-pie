@@ -1,4 +1,9 @@
 recursive-include structpie *.py
+recursive-include stack *.h
+recursive-include binary_search_tree *.h
+recursive-include hash_table *.h
+recursive-include priority_queue *.h
+
 
 include requirements.txt
 include README.md
