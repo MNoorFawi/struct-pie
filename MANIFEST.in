@@ -1,0 +1,7 @@
+recursive-include structpie *.py
+
+include requirements.txt
+include README.md
+include MANIFEST.in
+include *.py
+include LICENSE
