@@ -23,7 +23,7 @@ with open("requirements.txt") as rq:
 
 setup(
       name="structpie",
-      version="0.0.2",
+      version="0.0.3",
       description="A set of python modules for data structures written in C",
       packages=["structpie"],
       install_requires=requirements,
