@@ -1,3 +1,5 @@
+#define STRLEN 100
+
 // enum to switch between types
 typedef enum {
   INT,
@@ -10,7 +12,7 @@ Type;
 typedef union {
   int _int;
   float _float;
-  char _str[100];
+  char _str[STRLEN];
 }
 Values;
 

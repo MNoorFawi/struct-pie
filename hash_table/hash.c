@@ -8,7 +8,7 @@ int str_to_int(char * str) {
   int i = 0, output = 0;
   for (; str[i] != '\0'; ++i)
     output = output * 10 + str[i] - '0';
-  return output;
+  return abs(output);
 }
 
 // hash func family for int, float and char *
@@ -134,7 +134,7 @@ int val_search(ht * table, Tuple value) {
 returning a char * to make it easy to return any type (for now) */
 char * search_by_index(ht * table, int ind) {
   ls * slot;
-  static char res[100];
+  static char res[STRLEN];
   int index = hash_func(ind, table -> size);
   slot = table -> slot_array[index];
   if (slot) { // not NULL

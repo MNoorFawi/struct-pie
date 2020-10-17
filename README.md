@@ -57,7 +57,7 @@ To initiate a hash table, size and type should be specified. It supports 'int', 
 size = 10
 type = "str"
 ht = HashTable(size, type)
-arr = ["Hello", "Salam", "Hola", "Ola", "Ciao", "Konnichiwa", "Merhaba", "privetstviye"]
+arr = ["Hello", "Salam", "Hola", "Ola", "Ciao", "Konnichiwa", "Merhaba", "Privetstviye"]
 ```
 
 If the table is of "str" type, input string should be converted into **bytes** for Cython to be able to convert it into **C char***. 
@@ -69,7 +69,7 @@ for i in arr:
 # print the table
 ht.display()
 # index(0):
-# index(1):  Salam
+# index(1):  Privetstviye  Salam
 # index(2):
 # index(3):  Ciao  Hello
 # index(4):
@@ -77,7 +77,7 @@ ht.display()
 # index(6):
 # index(7):
 # index(8):
-# index(9):  Merhaba  Ola  Hola
+# index(9):  Merhaba  Konnichiwa  Ola  Hola
 ```
 Check the size of the table and how many indices are occupied.
 ```python
@@ -94,7 +94,7 @@ print("search for value Merhaba --> %d" % ht.search_value("Merhaba".encode()))
 print("search for value Namaste --> %d" % ht.search_value("Namaste".encode()))
 # search for value Namaste --> 0
 print("search by index 1 --> value %s found" % ht.search_by_index(1))
-# search by index 1 --> value Salam found
+# search by index 1 --> value Privetstviye found
 print("remove value Ola --> %d" % ht.val_del("Ola".encode()))
 # remove value Ola --> 1
 print("search again for value Ola --> %d" % ht.search_value("Ola".encode()))
@@ -106,7 +106,7 @@ Print again
 ```python
 ht.display()
 # index(0):
-# index(1):  Salam
+# index(1):  Privetstviye  Salam
 # index(2):
 # index(3):  Ciao  Hello
 # index(4):
@@ -114,7 +114,7 @@ ht.display()
 # index(6):
 # index(7):
 # index(8):
-# index(9):  Merhaba  Hola
+# index(9):  Merhaba  Konnichiwa  Hola
 ```
 #### The library also supports Binary Search Tree and Priority Queues. 
 
