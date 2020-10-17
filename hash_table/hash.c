@@ -7,8 +7,9 @@
 int str_to_int(char * str) {
   int i = 0, output = 0;
   for (; str[i] != '\0'; ++i)
-    output = output * 10 + str[i] - '0';
-  return abs(output);
+	  // ascii code of character
+    output += str[i]; // str[i] - '0'; // gives numeric value of a number in an ascii code
+  return output / i; // to decrease the value
 }
 
 // hash func family for int, float and char *
