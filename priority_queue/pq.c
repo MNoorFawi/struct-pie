@@ -48,9 +48,10 @@ char * execute(pq ** front, pq ** rear) {
   int p;
   // Empty queue
   if (( * front == * rear) && ( * rear == NULL)) {
-    puts("\n\tThe queue is empty\n");
+    puts("The queue is empty");
     //exit(0);
-    strcpy(s, "");
+    //strcpy(s, "");
+	return "";
   } else {
 
     strcpy(s, ( * front) -> data);
@@ -63,7 +64,7 @@ char * execute(pq ** front, pq ** rear) {
     if ( * rear == temp)
       *
       rear = ( * rear) -> next; // to make *rear NULL
-    printf("\n(%s) with priority (%i) has been removed\n",
+    printf("(%s) with priority (%i) has been removed\n",
       s, p);
     free(temp);
   }
@@ -72,11 +73,11 @@ char * execute(pq ** front, pq ** rear) {
 
 void display(pq * front, pq * rear) {
   if ((front == rear) && (rear == NULL)) {
-    puts("\n\tThe queue is Empty\n");
+    puts("The queue is Empty");
   } else {
     puts("(");
     do {
-      printf("\t{%s, %i}\n", front -> data, front -> priority);
+      printf(" {%s, %i}\n", front -> data, front -> priority);
       front = front -> next;
     } while (front != rear -> next);
     puts(")");

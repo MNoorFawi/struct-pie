@@ -95,6 +95,7 @@ void inorder(tn * root) {
       }
     }
   }
+  puts("");
 }
 
 // calculate nodes count recursively

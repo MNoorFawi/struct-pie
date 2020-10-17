@@ -116,6 +116,143 @@ ht.display()
 # index(8):
 # index(9):  Merhaba  Konnichiwa  Hola
 ```
-#### The library also supports Binary Search Tree and Priority Queues. 
+#### Binary Search Tree
+Binary search tree is a great data structure for quick searching and dynamic sorting while inserting new data. It is widely used in so many applications like indexing in databases for fast lookup.
 
-More data structures will be supported soon.
+Struct Pie provides a C-written binary search tree for usage in python.
+
+Insertion is a little bit slower than appending to a python list, but searching is so much faster.
+
+Struct Pie BST nodes can hold 3 data pieces; (int index, char* info1, float info2). This will be extended soon to hold more data.
+
+Let's try the binary search tree on some sample data about Uefa Champions League all-time goalscorers. Each row represents (number of goals, name, goal/game ratio).
+```python
+# initiate bstree
+bst = BSTree()
+
+import pandas as pd
+data = pd.read_csv("./binary_search_tree/example_data.csv", header = None)
+data
+#      0                    1     2
+#0   130    Cristiano Ronaldo  0.76
+#1   115         Lionel Messi  0.80
+#2    71        Raul Gonzalez  0.50
+#3    68   Robert Lewandowski  0.76
+#4    65        Karim Benzema  0.54
+#5    56  Ruud van Nistelrooy  0.77
+#6    50        Thierry Henry  0.45
+#7    49   Alfredo Di Stefano  0.84
+#8    48    Andriy Shevchenko  0.48
+#9    48   Zlatan Ibrahimovic  0.40
+#10   46        Thomas Muller  0.40
+```
+Let's insert the data into the tree
+```python
+for i in range(data.shape[0]):
+    bst.insert(data.iloc[i, 0], data.iloc[i, 1].encode(), data.iloc[i, 2])
+
+# check that all data was inserted
+data.shape[0] == bst.node_count()
+# True
+```
+Some operations on the tree; **(inorder) printing, searching and deleting**
+```python
+# print inorder 
+bst.inorder()
+# 46 -> 48 -> 48 -> 49 -> 50 -> 56 -> 65 -> 68 -> 71 -> 115 -> 130 ->
+
+# search for an index
+bst.search(40)
+# "node doesn't exist"
+
+bst.search(48)
+# (48, b'Andriy Shevchenko', 0.48)
+
+bst.search(46)
+# (46, b'Thomas Muller', 0.4)
+
+bst.search(49)
+# (49, b'Alfredo Di Stefano', 0.84)
+
+# delete a node
+bst.remove(48)
+
+# new order after deletion
+bst.inorder()
+# 46 -> 48 -> 49 -> 50 -> 56 -> 65 -> 68 -> 71 -> 115 -> 130 ->
+
+bst.node_count()
+# 10
+
+bst.remove(71)
+bst.node_count()
+# 9
+bst.inorder()
+# 46 -> 48 -> 49 -> 50 -> 56 -> 65 -> 68 -> 115 -> 130 ->
+
+bst.search(65)
+# (65, b'Karim Benzema', 0.54)
+```
+
+#### Priority Queue
+Priority queue is a very good data structure for inserting new values and ordering the queue according to certain priority so that when poping the more important ones get popped first even if they were inserted later.
+
+```python
+pq = PQ()
+pq.display()
+# The queue is Empty
+```
+PQ takes two inputs, for now, (char * name, int priority). This will definitely be expanded soon.
+###### C char* is represented in python as bytes by cython. So while inserting strings, they should be encoded into bytes first.
+
+Let's insert some tasks and priorities:
+```python
+pq.push(b"exercise", 3)
+pq.push(b"sleep", 2)
+pq.push(b"repeat", 1)
+pq.push(b"code", 5)
+pq.display()
+# (
+#  {code, 5}
+#  {exercise, 3}
+#  {sleep, 2}
+#  {repeat, 1}
+# )
+``` 
+Queue was dynamically ordered according to priorities.
+
+Now let's pop:
+```python
+pq.pop()
+# (code) with priority (5) has been removed
+# 'code'
+```
+Note that pop method prints a confirmation message and returns the task name as a string
+```python
+some = pq.pop()
+# (exercise) with priority (3) has been removed
+print(some)
+# exercise
+
+pq.display()
+# (
+#  {sleep, 2}
+#  {repeat, 1}
+# )
+
+pq.pop()
+# (sleep) with priority (2) has been removed
+# 'sleep'
+pq.pop()
+# (repeat) with priority (1) has been removed
+# 'repeat'
+
+## when trying to pop from an empty queue, an empty string '' is returned.
+pq.pop()
+# The queue is empty
+# ''
+pq.display()
+# The queue is Empty
+```
+
+**More data structures will be supported soon.**
