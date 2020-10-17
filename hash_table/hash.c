@@ -267,3 +267,66 @@ int filled_indices(ht * table) {
 int len(ht * table) {
   return table -> size;
 }
+
+int search_indx(ht * table, char ** arr, int ind) {
+  ls * slot;
+  int i = 0;
+  char res[STRLEN];
+  int index = hash_func(ind, table -> size);
+  slot = table -> slot_array[index];
+  if (slot) { // not NULL
+    switch (table -> type) {
+    case INT:
+      while (slot) {
+        sprintf(res, "%d", slot -> value._int); // found
+        arr[i] = (char * ) malloc(sizeof(res));
+        strcpy(arr[i], res);
+        //free(arr[i]);
+        i++;
+        slot = slot -> next;
+      }
+      return i;
+    case FLOAT:
+      while (slot) {
+        sprintf(res, "%f", slot -> value._float); // found
+        arr[i] = (char * ) malloc(sizeof(res));
+        strcpy(arr[i], res);
+        //free(arr[i]);
+        i++;
+        slot = slot -> next;
+      }
+      return i;
+    case STR:
+      while (slot) {
+        sprintf(res, "%s", slot -> value._str); // found
+        arr[i] = (char * ) malloc(sizeof(res));
+        strcpy(arr[i], res);
+        //free(arr[i]);
+        i++;
+        slot = slot -> next;
+      }
+      return i;
+    }
+
+  } else
+    return -1; // not found
+}
+
+int get_indx(ht * table, Tuple value) {
+  int index;
+  if (val_search(table, value)) {
+    switch (table -> type) {
+    case INT:
+      index = hash_func(value.val._int, table -> size);
+      return index;
+    case FLOAT:
+      index = hash_func(value.val._float, table -> size);
+      return index;
+    case STR:
+      index = hash_func(value.val._str, table -> size);
+      return index;
+    }
+  } else {
+    return -1;
+  }
+}

@@ -11,7 +11,7 @@ pip install structpie
 
 Testing the different data structures from within python
 
-#### Hash Table
+### Hash Table
 **Separate Chaining** hash map that enables fast lookup and search. 
 It facilitates searching by "value" **O(1)**, in contrary to python dictionary which enables O(1) search when key is known.
 
@@ -19,6 +19,8 @@ For full comparison between list, dict and HashTable, try to run the **example.p
 
 To initiate a hash table, size and type should be specified. It supports 'int', 'float' and 'str'
 ```python
+from structpie import *
+
 size = 10
 type = "str"
 ht = HashTable(size, type)
@@ -82,7 +84,28 @@ ht.display()
 # index(9):  Privetstviye
 ```
 
-#### LIFO & FIFO Stack
+Get index of a specific value
+```python
+ht.get_index(b"Hello")
+# 0
+
+ht.get_index(b"Salam")
+# 8
+```
+
+We also can get all the values in a particular index
+```python
+ht.search_index(8)
+# ['Merhaba', 'Salam']
+
+ht.search_index(1)
+# []
+
+ht.search_index(ht.get_index(b"Salam"))
+# ['Merhaba', 'Salam']
+```
+
+### LIFO & FIFO Stack
 ```python
 from structpie import *
 
@@ -117,7 +140,7 @@ st.display()
 ```
 **The stack can also contain data of type 'float' and 'str'**
 
-#### Binary Search Tree
+### Binary Search Tree
 Binary search tree is a great data structure for quick searching and dynamic sorting while inserting new data. It is widely used in so many applications like indexing in databases for fast lookup.
 
 Struct Pie provides a C-written binary search tree for usage in python.
@@ -195,7 +218,7 @@ bst.search(65)
 # (65, b'Karim Benzema', 0.54)
 ```
 
-#### Priority Queue
+### Priority Queue
 Priority queue is a very good data structure for inserting new values and ordering the queue according to certain priority so that when poping the more important ones get popped first even if they were inserted later.
 
 ```python

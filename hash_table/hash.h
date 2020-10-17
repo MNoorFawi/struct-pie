@@ -56,6 +56,8 @@ int delete_val(ht * table, Tuple value);
 void print_hash(ht * table, int size);
 int filled_indices(ht * table);
 int len(ht * table);
+int search_indx(ht * table, char ** arr, int ind);
+int get_indx(ht * table, Tuple value);
 
 // combining the hash functions into one function like macro that accepts multiple types
 #define hash_func(x, y)\
