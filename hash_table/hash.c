@@ -271,37 +271,34 @@ int len(ht * table) {
 int search_indx(ht * table, char ** arr, int ind) {
   ls * slot;
   int i = 0;
-  char res[STRLEN];
+  //char res[STRLEN];
   int index = hash_func(ind, table -> size);
   slot = table -> slot_array[index];
   if (slot) { // not NULL
     switch (table -> type) {
     case INT:
       while (slot) {
-        sprintf(res, "%d", slot -> value._int); // found
         arr[i] = (char * ) malloc(sizeof(char) * STRLEN);
-        strncpy(arr[i], res, STRLEN); // safer than strcpy
-        //free(arr[i]);
+        snprintf(arr[i], STRLEN, "%d", slot -> value._int); // found // safer than sprintf
+        //strncpy(arr[i], res, STRLEN); // safer than strcpy
         i++;
         slot = slot -> next;
       }
       return i;
     case FLOAT:
       while (slot) {
-        sprintf(res, "%f", slot -> value._float); // found
         arr[i] = (char * ) malloc(sizeof(char) * STRLEN);
-        strncpy(arr[i], res, STRLEN);
-        //free(arr[i]);
+        snprintf(arr[i], STRLEN, "%f", slot -> value._float);
+        //strncpy(arr[i], res, STRLEN);
         i++;
         slot = slot -> next;
       }
       return i;
     case STR:
       while (slot) {
-        sprintf(res, "%s", slot -> value._str); // found
         arr[i] = (char * ) malloc(sizeof(char) * STRLEN);
-        strncpy(arr[i], res, STRLEN);
-        //free(arr[i]);
+        snprintf(arr[i], STRLEN, "%s", slot -> value._str);
+        //strncpy(arr[i], res, STRLEN); 
         i++;
         slot = slot -> next;
       }
