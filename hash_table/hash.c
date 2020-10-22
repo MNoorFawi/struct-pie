@@ -279,8 +279,8 @@ int search_indx(ht * table, char ** arr, int ind) {
     case INT:
       while (slot) {
         sprintf(res, "%d", slot -> value._int); // found
-        arr[i] = (char * ) malloc(sizeof(res));
-        strcpy(arr[i], res);
+        arr[i] = (char * ) malloc(sizeof(char) * STRLEN);
+        strncpy(arr[i], res, STRLEN); // safer than strcpy
         //free(arr[i]);
         i++;
         slot = slot -> next;
@@ -289,8 +289,8 @@ int search_indx(ht * table, char ** arr, int ind) {
     case FLOAT:
       while (slot) {
         sprintf(res, "%f", slot -> value._float); // found
-        arr[i] = (char * ) malloc(sizeof(res));
-        strcpy(arr[i], res);
+        arr[i] = (char * ) malloc(sizeof(char) * STRLEN);
+        strncpy(arr[i], res, STRLEN);
         //free(arr[i]);
         i++;
         slot = slot -> next;
@@ -299,8 +299,8 @@ int search_indx(ht * table, char ** arr, int ind) {
     case STR:
       while (slot) {
         sprintf(res, "%s", slot -> value._str); // found
-        arr[i] = (char * ) malloc(sizeof(res));
-        strcpy(arr[i], res);
+        arr[i] = (char * ) malloc(sizeof(char) * STRLEN);
+        strncpy(arr[i], res, STRLEN);
         //free(arr[i]);
         i++;
         slot = slot -> next;
