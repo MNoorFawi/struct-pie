@@ -66,12 +66,11 @@ _Generic((x), \
   default: hash_func_int)(x, y)
 
 // make display function with default argument
-#define print_hash(...) print_wrapper((func_args) {__VA_ARGS__})
+#define print_hash(table, ...) print_wrapper(table, (func_args) {__VA_ARGS__})
 
 typedef struct {
-  ht * table;
   int displayed;
 }
 func_args;
 
-void print_wrapper(func_args input);
+void print_wrapper(ht * table, func_args input);

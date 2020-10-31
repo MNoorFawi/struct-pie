@@ -260,9 +260,9 @@ void printhash(ht * table, int size) {
   puts("");
 }
 
-void print_wrapper(func_args input) {
-  int displayed = input.displayed ? input.displayed : input.table -> size;
-  return printhash(input.table, displayed);
+void print_wrapper(ht * table, func_args input) {
+  int displayed = input.displayed ? input.displayed : table -> size;
+  return printhash(table, displayed);
 }
 
 int filled_indices(ht * table) {
