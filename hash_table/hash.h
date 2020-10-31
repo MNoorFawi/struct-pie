@@ -53,7 +53,7 @@ int val_search(ht * table, Tuple value);
 char * search_by_index(ht * table, int ind);
 void insert(ht * table, Tuple value);
 int delete_val(ht * table, Tuple value);
-void print_hash(ht * table, int size);
+void printhash(ht * table, int size);
 int filled_indices(ht * table);
 int len(ht * table);
 int search_indx(ht * table, char ** arr, int ind);
@@ -64,3 +64,14 @@ int get_indx(ht * table, Tuple value);
 _Generic((x), \
   int: hash_func_int, float: hash_func_float, char *: hash_func_str, \
   default: hash_func_int)(x, y)
+
+// make display function with default argument
+#define print_hash(...) print_wrapper((func_args) {__VA_ARGS__})
+
+typedef struct {
+  ht * table;
+  int displayed;
+}
+func_args;
+
+void print_wrapper(func_args input);

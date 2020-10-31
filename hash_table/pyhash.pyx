@@ -38,7 +38,7 @@ cdef extern from "hash.h":
     char *search_by_index(ht * table, int ind)
     void insert(ht * htable, Tuple value)
     int delete_val(ht * table, Tuple value)
-    void print_hash(ht * table, int size)
+    void print_hash(...)
     int filled_indices(ht * table)
     int len(ht * table)
     int search_indx(ht * table, char ** arr, int ind)
@@ -82,8 +82,11 @@ cdef class HashTable:
         cdef Tuple t = val_to_tup(val)
         return delete_val(self.hash, t)
 
-    def display(self):
-        print_hash(self.hash, self.size)
+    def display(self, displayed = 0):
+        if displayed == 0:
+            print_hash(self.hash)
+        else:
+            print_hash(self.hash, <int>displayed)
 
     cpdef str search_by_index(self, int ind):
         cdef bytes s = search_by_index(self.hash, ind)

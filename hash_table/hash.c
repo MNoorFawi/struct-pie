@@ -231,9 +231,9 @@ int delete_val(ht * table, Tuple value) {
   }
 }
 
-void print_hash(ht * table, int size) {
+void printhash(ht * table, int size) {
   int i;
-  for (i = 0; i < table -> size; ++i) {
+  for (i = 0; i < size; ++i) {
     printf("\nindex(%d): ", i);
     ls * val = table -> slot_array[i];
     switch (table -> type) {
@@ -258,6 +258,11 @@ void print_hash(ht * table, int size) {
     }
   }
   puts("");
+}
+
+void print_wrapper(func_args input) {
+  int displayed = input.displayed ? input.displayed : input.table -> size;
+  return printhash(input.table, displayed);
 }
 
 int filled_indices(ht * table) {
