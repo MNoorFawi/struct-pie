@@ -105,6 +105,21 @@ ht.search_index(ht.get_index(b"Salam"))
 # ['Merhaba', 'Salam']
 ```
 
+Displaying first certain number of indices with **display** method. Acts like **head** in python dataframes:
+```python
+ht.display(5) ##specifying how many indices to display
+
+# index(0):  Hello
+# index(1):
+# index(2):
+# index(3):  Konnichiwa
+# index(4):
+```
+
+**There are some empty unused indices that's because the hash_func used with string is so simple for now but better implementation will be available in future versions.**
+
+**Meanwhile in <int> HashTable this issue will be seen less.**
+
 ### LIFO & FIFO Stack
 ```python
 from structpie import *
