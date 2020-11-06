@@ -39,7 +39,7 @@ cdef extern from "hash.h":
     void insert(ht * htable, Tuple value)
     int delete_val(ht * table, Tuple value)
 	## specifying here the type of the hash table in contrary to in the macro
-    void print_hash(ht * table, ...)
+    void print_hash(...)
     int filled_indices(ht * table)
     int len(ht * table)
     int search_indx(ht * table, char ** arr, int ind)
