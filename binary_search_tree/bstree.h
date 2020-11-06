@@ -1,18 +1,24 @@
-#define STACK_SIZE 1000
+#define STACK_SIZE 1000000
+
+typedef struct {
+	int indx;
+	char *cdata;
+	float fdata;
+} data;
 
 struct tree_node {
-  int indx;
-  char * name;
-  float ratio;
+  data * dat;
   struct tree_node * left, * right;
 };
 
 typedef struct tree_node tn;
 
+data * populate_dat(int indx, char * cdata, float fdata);
+void free_node(tn * node);
 void error(void);
 void insert(tn ** root, int indx, char * name, float ratio);
 void inorder(tn * root);
 int count(tn * root);
-tn * search(tn * root, int key);
+data * search(tn * root, int key);
 tn * get_ptr(tn * root, int key, tn ** root_ptr);
 tn * delete(tn * root, int key);

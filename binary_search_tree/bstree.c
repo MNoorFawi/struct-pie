@@ -8,6 +8,20 @@ void error(void) {
   exit(0);
 }
 
+data * populate_dat(int indx, char * cdata, float fdata) {
+  data * dat = (data * ) malloc(sizeof(data));
+  dat -> indx = indx;
+  dat -> cdata = strdup(cdata);
+  dat -> fdata = fdata;
+  return dat;
+}
+
+void free_node(tn * node) {
+  free(node -> dat -> cdata);
+  free(node -> dat);
+  free(node);
+}
+
 void insert(tn ** root, int indx, char * name, float ratio) {
   tn * tree1, * tree2; // temporary trees to traverse the tree back and forth
 
@@ -18,9 +32,7 @@ void insert(tn ** root, int indx, char * name, float ratio) {
       error();
 
     // populate tree
-    ( * root) -> indx = indx;
-    ( * root) -> ratio = ratio;
-    ( * root) -> name = strdup(name);
+    ( * root) -> dat = populate_dat(indx, name, ratio);
     ( * root) -> left = ( * root) -> right = NULL; // empty children
 
     // non-empty tree
@@ -30,7 +42,7 @@ void insert(tn ** root, int indx, char * name, float ratio) {
     /* traverse the tree to get the pointer of the parent of the (new child) */
     while (tree1 != NULL) { // loop until the node has no children
       tree2 = tree1; // to keep track of parent node while traversing to child
-      if (tree1 -> indx > indx)
+      if (tree1 -> dat -> indx > indx)
         tree1 = tree1 -> left;
       else
         tree1 = tree1 -> right;
@@ -38,15 +50,13 @@ void insert(tn ** root, int indx, char * name, float ratio) {
 
     // determine whether it will be left or right child
     // left child
-    if (tree2 -> indx > indx) {
+    if (tree2 -> dat -> indx > indx) {
       tree2 -> left = (tn * ) malloc(sizeof(tn));
       tree2 = tree2 -> left; // traverse down to check for any mem allocation errors
       if (tree2 == NULL)
         error();
       // populate
-      tree2 -> indx = indx;
-      tree2 -> ratio = ratio;
-      tree2 -> name = strdup(name);
+      tree2 -> dat = populate_dat(indx, name, ratio);
       tree2 -> left = tree2 -> right = NULL;
 
       // right child
@@ -55,9 +65,7 @@ void insert(tn ** root, int indx, char * name, float ratio) {
       tree2 = tree2 -> right;
       if (tree2 == NULL)
         error();
-      tree2 -> indx = indx;
-      tree2 -> ratio = ratio;
-      tree2 -> name = strdup(name);
+      tree2 -> dat = populate_dat(indx, name, ratio);
       tree2 -> left = tree2 -> right = NULL;
     }
   }
@@ -84,7 +92,7 @@ void inorder(tn * root) {
 
       root = stack[top]; // pop
       --top;
-      printf("%d -> ", root -> indx); // print path
+      printf("%d -> ", root -> dat -> indx); // print path
       root = root -> right; // go right
 
       // pushing the right children into stack
@@ -110,16 +118,16 @@ int count(tn * root) {
   }
 }
 
-tn * search(tn * root, int key) {
+data * search(tn * root, int key) {
   tn * tree; // temporary tree to traverse the tree
   tree = root; // to keep track of the root node
 
   while (tree != NULL) { // loop until no chilren
-    if (tree -> indx == key)
-      return tree; // return the node when you find the key
+    if (tree -> dat -> indx == key)
+      return tree -> dat; // return the node when you find the key
     // not found yet
     else {
-      if (tree -> indx > key)
+      if (tree -> dat -> indx > key)
         tree = tree -> left; // go left
       else
         tree = tree -> right; // go right
@@ -136,12 +144,12 @@ tn * get_ptr(tn * root, int key, tn ** root_ptr) {
   tree = root;
   * root_ptr = NULL; // this like tree2 in insert function but needs to be returned here as well
   while (tree != NULL) {
-    if (tree -> indx == key) // found
+    if (tree -> dat -> indx == key) // found
       return tree; // return the node
     // not found yet
     else {
       * root_ptr = tree; // store this pointer as parent root of children
-      if (tree -> indx > key)
+      if (tree -> dat -> indx > key)
         tree = tree -> left; // go left
       else
         tree = tree -> right; // go right
@@ -168,7 +176,7 @@ tn * delete(tn * root, int key) {
         its_parent -> left = NULL;
       else
         its_parent -> right = NULL;
-      free(to_be_deleted);
+      free_node(to_be_deleted);
       return root;
     }
 
@@ -180,7 +188,7 @@ tn * delete(tn * root, int key) {
         temp_tree = temp_tree -> left;
       }
       temp_tree -> left = to_be_deleted -> left; // assign the left child to temp min left child 
-      free(to_be_deleted);
+      free_node(to_be_deleted);
       return root;
     }
 
@@ -203,7 +211,7 @@ tn * delete(tn * root, int key) {
         to_be_deleted -> left = NULL;
         to_be_deleted -> right = NULL;
       }
-      free(to_be_deleted);
+      free_node(to_be_deleted);
       return root;
     }
 
@@ -214,7 +222,7 @@ tn * delete(tn * root, int key) {
       else
         its_parent -> right = to_be_deleted -> right;
       to_be_deleted -> right = NULL;
-      free(to_be_deleted);
+      free_node(to_be_deleted);
       return root;
     }
     if (to_be_deleted -> left && !to_be_deleted -> right) { // left child
@@ -223,7 +231,7 @@ tn * delete(tn * root, int key) {
       else
         its_parent -> right = to_be_deleted -> left;
       to_be_deleted -> left = NULL;
-      free(to_be_deleted);
+      free_node(to_be_deleted);
       return root;
     }
   }
