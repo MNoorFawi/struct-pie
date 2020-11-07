@@ -98,7 +98,7 @@ void insert_node(tn ** root, tn * _new, Type type) {
   }
 }
 // iterative inorder traversal with a stack (non-recursive)
-void pinorder(tn * root, Type type) {
+void inorder(tn * root, Type type) {
   tn * stack[STACK_SIZE];
   int top = -1;
   // not empty tree
@@ -142,7 +142,7 @@ void pinorder(tn * root, Type type) {
   //puts("");
 }
 
-tn * searchtree(tn * root, Tuple value, Type type) {
+tn * search_tree(tn * root, Tuple value, Type type) {
   tn * tree; // temporary tree to traverse the tree
   tree = root; // to keep track of the root node
 
@@ -183,7 +183,7 @@ tn * get_ptr(tn * root, Tuple key, tn ** root_ptr, Type type) {
 }
 
 // delete the node
-void deletenode(tn ** root, Tuple key, Type type, int * filled) {
+void delete_node(tn ** root, Tuple key, Type type, int * filled) {
   // temporary variables
   tn * to_be_deleted, * its_parent, * temp_tree; // temp_tree changes pointers in the tree
   to_be_deleted = get_ptr( * root, key, & its_parent, type);
@@ -206,6 +206,8 @@ void deletenode(tn ** root, Tuple key, Type type, int * filled) {
       } else {
         // it is the root
         free(to_be_deleted);
+		* filled = * filled - 1;
+		* root = NULL;
         return;
       }
     }
@@ -227,7 +229,7 @@ void deletenode(tn ** root, Tuple key, Type type, int * filled) {
       }
       // tree will be empty
       free(to_be_deleted);
-      * filled = * filled - 1;
+      //* filled = * filled - 1;
       return;
 
     }

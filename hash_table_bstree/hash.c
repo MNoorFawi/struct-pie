@@ -119,7 +119,7 @@ int val_search(ht * table, Tuple value) {
     index = hash_func(value.val._str, table -> size);
     break;
   }
-  slot = searchtree(table -> slot_array[index], value, table->type); // the chain containing the value
+  slot = search_tree(table -> slot_array[index], value, table->type); // the chain containing the value
   return !(slot == NULL); // 1 (true) if found 0 (false) if not
 }
 
@@ -136,7 +136,7 @@ char * search_by_index(ht * table, int ind) {
       sprintf(res, "%d", slot -> value._int); // found
       return res;
     case FLOAT:
-      sprintf(res, "%f", slot -> value._float);
+      sprintf(res, "%.2f", slot -> value._float);
       return res;
     case STR:
       sprintf(res, "%s", slot -> value._str);
@@ -163,7 +163,7 @@ void delete_val(ht * table, Tuple value) {
     index = hash_func(value.val._str, table -> size);
 	break;
   }
-  deletenode(&table -> slot_array[index], value, table -> type, &table->filled);
+  delete_node(&table -> slot_array[index], value, table -> type, &table->filled);
 }
 
 void printhash(ht * table, int size) {
@@ -171,7 +171,7 @@ void printhash(ht * table, int size) {
   for (i = 0; i < size; ++i) {
     printf("\nindex(%d): ", i);
     tn * val = table -> slot_array[i];
-    pinorder(val, table->type);
+    inorder(val, table->type);
   }
   puts("");
 }

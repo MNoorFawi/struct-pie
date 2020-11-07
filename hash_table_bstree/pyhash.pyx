@@ -22,14 +22,6 @@ cdef extern from "bstree.h":
 	ctypedef struct Tuple:
 		Type type
 		Values val
-		
-	int compare(tn * x, tn * y, Type type)
-	int compare2(tn * x, Tuple y, Type type, char op)
-	void insert_node(tn ** root, tn * _new, Type type)
-	void inorder(tn * root, Type type)
-	tn * searchtree(tn * root, Tuple value, Type type)
-	tn * get_ptr(tn * root, Tuple key, tn ** root_ptr, Type type)
-	void deletenode(tn ** root, Tuple key, Type type, int * filled)
 
 cdef extern from "hash.h":
 	cdef struct hash_table:
@@ -54,7 +46,7 @@ cdef extern from "hash.h":
 	int len(ht * table)
 	int get_indx(ht * table, Tuple value)
 
-cdef Tuple val_to_tup(val):
+cdef Tuple to_tup(val):
 	cdef Tuple t
 	if isinstance(val, int):
 		t = int_in(val)
@@ -64,7 +56,7 @@ cdef Tuple val_to_tup(val):
 		t = str_in(val)
 	return t
 
-cdef class HashTable:
+cdef class HashBSTree:
 	cdef ht * hash
 	cdef int size
 	cdef int filled
@@ -81,15 +73,15 @@ cdef class HashTable:
 		self.hash = hash_init(table_size, self.input)
 
 	def search_value(self, val):
-		cdef Tuple t = val_to_tup(val)
+		cdef Tuple t = to_tup(val)
 		return val_search(self.hash, t)
 
 	def insert_val(self, val):
-		cdef Tuple t = val_to_tup(val)
+		cdef Tuple t = to_tup(val)
 		insert(self.hash, t)
 
 	def val_del(self, val):
-		cdef Tuple t = val_to_tup(val)
+		cdef Tuple t = to_tup(val)
 		delete_val(self.hash, t)
 
 	def display(self, displayed = 0):
@@ -109,5 +101,5 @@ cdef class HashTable:
 		return filled_indices(self.hash)
 
 	def get_index(self, val):
-		cdef Tuple t = val_to_tup(val)
+		cdef Tuple t = to_tup(val)
 		return get_indx(self.hash, t)
