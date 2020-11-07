@@ -139,7 +139,7 @@ void pinorder(tn * root, Type type) {
       }
     }
   }
-  puts("");
+  //puts("");
 }
 
 tn * searchtree(tn * root, Tuple value, Type type) {
