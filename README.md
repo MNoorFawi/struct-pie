@@ -3,6 +3,8 @@ A set of python modules for data structures. All data structures are written in 
 
 The idea is to extend python data structures to add more flexibility and to include more data structures that can help in different situations.
 
+**There is also a StructPie project on sourceforge.net that contains all these data structures as C shared libraries that can readily be used in C projects. The libraries can be downloaded from [here](https://sourceforge.net/projects/struct-pie/).**
+
 ## Quick Start
 To install the library
 ```bash
