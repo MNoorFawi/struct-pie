@@ -3,6 +3,7 @@ recursive-include stack *.h
 recursive-include binary_search_tree *.h
 recursive-include hash_table *.h
 recursive-include priority_queue *.h
+recursive-include hash_table_bstree *.h
 
 include requirements.txt
 include README.md

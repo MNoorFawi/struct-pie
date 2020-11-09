@@ -85,15 +85,15 @@ void insert(ht * table, Tuple value) {
   int index;
   switch (value.type) { // depends on type of input
   case INT:
-    index = hash_func(value.val._int, table -> size); // create index for given value
+    index = hash_func_int(value.val._int, table -> size); // create index for given value
     temp -> value._int = value.val._int; // insert the value in the slot
     break;
   case FLOAT:
-    index = hash_func(value.val._float, table -> size);
+    index = hash_func_float(value.val._float, table -> size);
     temp -> value._float = value.val._float;
     break;
   case STR:
-    index = hash_func(value.val._str, table -> size);
+    index = hash_func_str(value.val._str, table -> size);
     strcpy(temp -> value._str, value.val._str);
     break;
   }
@@ -110,13 +110,13 @@ int val_search(ht * table, Tuple value) {
   int index;
   switch (value.type) {
   case INT:
-    index = hash_func(value.val._int, table -> size); // find index of that value
+    index = hash_func_int(value.val._int, table -> size); // find index of that value
     break;
   case FLOAT:
-    index = hash_func(value.val._float, table -> size);
+    index = hash_func_float(value.val._float, table -> size);
     break;
   case STR:
-    index = hash_func(value.val._str, table -> size);
+    index = hash_func_str(value.val._str, table -> size);
     break;
   }
   slot = search_tree(table -> slot_array[index], value, table->type); // the chain containing the value
@@ -128,8 +128,8 @@ returning a char * to make it easy to return any type (for now) */
 char * search_by_index(ht * table, int ind) {
   tn * slot;
   static char res[STRLEN];
-  int index = hash_func(ind, table -> size);
-  slot = table -> slot_array[index];
+  //int index = hash_func_int(ind, table -> size);
+  slot = table -> slot_array[ind];
   if (slot) { // not NULL
     switch (table -> type) {
     case INT:
@@ -152,15 +152,15 @@ void delete_val(ht * table, Tuple value) {
   int index;
   switch (table -> type) {
   case INT:
-    index = hash_func(value.val._int, table -> size); // get index of given value
+    index = hash_func_int(value.val._int, table -> size); // get index of given value
 	break;
 
   case FLOAT:
-    index = hash_func(value.val._float, table -> size);
+    index = hash_func_float(value.val._float, table -> size);
 	break;
 
   case STR:
-    index = hash_func(value.val._str, table -> size);
+    index = hash_func_str(value.val._str, table -> size);
 	break;
   }
   delete_node(&table -> slot_array[index], value, table -> type, &table->filled);
@@ -194,13 +194,13 @@ int get_indx(ht * table, Tuple value) {
   if (val_search(table, value)) {
     switch (table -> type) {
     case INT:
-      index = hash_func(value.val._int, table -> size);
+      index = hash_func_int(value.val._int, table -> size);
       return index;
     case FLOAT:
-      index = hash_func(value.val._float, table -> size);
+      index = hash_func_float(value.val._float, table -> size);
       return index;
     case STR:
-      index = hash_func(value.val._str, table -> size);
+      index = hash_func_str(value.val._str, table -> size);
       return index;
     }
   } else {

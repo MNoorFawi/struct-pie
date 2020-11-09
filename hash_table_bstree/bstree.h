@@ -1,4 +1,4 @@
-#define STACK_SIZE 1000000
+#define STACK_SIZE 10000
 #define STRLEN 100
 
 // enum to switch between types

@@ -84,15 +84,15 @@ void insert(ht * table, Tuple value) {
   int index;
   switch (value.type) { // depends on type of input
   case INT:
-    index = hash_func(value.val._int, table -> size); // create index for given value
+    index = hash_func_int(value.val._int, table -> size); // create index for given value
     temp -> value._int = value.val._int; // insert the value in the slot
     break;
   case FLOAT:
-    index = hash_func(value.val._float, table -> size);
+    index = hash_func_float(value.val._float, table -> size);
     temp -> value._float = value.val._float;
     break;
   case STR:
-    index = hash_func(value.val._str, table -> size);
+    index = hash_func_str(value.val._str, table -> size);
     strcpy(temp -> value._str, value.val._str);
     break;
   }
@@ -110,19 +110,19 @@ int val_search(ht * table, Tuple value) {
   int index;
   switch (value.type) {
   case INT:
-    index = hash_func(value.val._int, table -> size); // find index of that value
+    index = hash_func_int(value.val._int, table -> size); // find index of that value
     slot = table -> slot_array[index]; // the chain containing the value
     while (slot && slot -> value._int != value.val._int) // search all the slots until found
       slot = slot -> next;
     break;
   case FLOAT:
-    index = hash_func(value.val._float, table -> size);
+    index = hash_func_float(value.val._float, table -> size);
     slot = table -> slot_array[index];
     while (slot && slot -> value._float != value.val._float)
       slot = slot -> next;
     break;
   case STR:
-    index = hash_func(value.val._str, table -> size);
+    index = hash_func_str(value.val._str, table -> size);
     slot = table -> slot_array[index];
     while (slot && strcmp(slot -> value._str, value.val._str) != 0)
       slot = slot -> next;
@@ -136,8 +136,8 @@ returning a char * to make it easy to return any type (for now) */
 char * search_by_index(ht * table, int ind) {
   ls * slot;
   static char res[STRLEN];
-  int index = hash_func(ind, table -> size);
-  slot = table -> slot_array[index];
+  //int index = hash_func(ind, table -> size);
+  slot = table -> slot_array[ind];
   if (slot) { // not NULL
     switch (table -> type) {
     case INT:
@@ -161,7 +161,7 @@ int delete_val(ht * table, Tuple value) {
   int index;
   switch (table -> type) {
   case INT:
-    index = hash_func(value.val._int, table -> size); // get index of given value
+    index = hash_func_int(value.val._int, table -> size); // get index of given value
     current_slot = table -> slot_array[index]; // index's slot
 
     if (current_slot && current_slot -> value._int == value.val._int) { // if found in current slot
@@ -184,7 +184,7 @@ int delete_val(ht * table, Tuple value) {
     return 0; // not found (false) to be deleted
 
   case FLOAT:
-    index = hash_func(value.val._float, table -> size);
+    index = hash_func_float(value.val._float, table -> size);
     current_slot = table -> slot_array[index];
 
     if (current_slot && current_slot -> value._float == value.val._float) {
@@ -207,7 +207,7 @@ int delete_val(ht * table, Tuple value) {
     return 0;
 
   case STR:
-    index = hash_func(value.val._str, table -> size);
+    index = hash_func_str(value.val._str, table -> size);
     current_slot = table -> slot_array[index];
 
     if (current_slot && strcmp(current_slot -> value._str, value.val._str) == 0) {
@@ -277,8 +277,8 @@ int search_indx(ht * table, char ** arr, int ind) {
   ls * slot;
   int i = 0;
   //char res[STRLEN];
-  int index = hash_func(ind, table -> size);
-  slot = table -> slot_array[index];
+  //int index = hash_func(ind, table -> size);
+  slot = table -> slot_array[ind];
   if (slot) { // not NULL
     switch (table -> type) {
     case INT:
@@ -319,13 +319,13 @@ int get_indx(ht * table, Tuple value) {
   if (val_search(table, value)) {
     switch (table -> type) {
     case INT:
-      index = hash_func(value.val._int, table -> size);
+      index = hash_func_int(value.val._int, table -> size);
       return index;
     case FLOAT:
-      index = hash_func(value.val._float, table -> size);
+      index = hash_func_float(value.val._float, table -> size);
       return index;
     case STR:
-      index = hash_func(value.val._str, table -> size);
+      index = hash_func_str(value.val._str, table -> size);
       return index;
     }
   } else {

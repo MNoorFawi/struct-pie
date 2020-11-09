@@ -235,6 +235,49 @@ bst.search(65)
 # (65, b'Karim Benzema', 0.54)
 ```
 
+### Hash Table with Binary Search Tree
+Implementing **hash table** data structure that uses *separate chaining* to avoid collisions. While in each indiex it uses a **binary search tree** instead of *linked lists* to store data that has similar indices produced by the hashing function to achieve **faster lookup**.
+
+Insertion is slower than insertion in linked lists but searching is faster.
+
+```python
+from structpie import *
+size = 5
+type = "int"
+hbst = HashBSTree(size, type)
+arr = [13, 11, 19, 91, 22, 12, 19, 94]
+
+for i in arr:
+    hbst.insert_val(i)
+
+hbst.display()
+
+# index(0):
+# index(1): 11 -> 91 ->
+# index(2): 12 -> 22 ->
+# index(3): 13 ->
+# index(4): 19 -> 19 -> 94 ->
+
+(hbst.length(), hbst.occupied())
+# (5, 4)
+hbst.search_value(94)
+# 1
+hbst.search_value(15)
+# 0
+hbst.search_by_index(3)
+# '13'
+hbst.val_del(91)
+
+hbst.search_value(91)
+# 0
+hbst.val_del(91)
+# The value does not exist
+hbst.get_index(19)
+# 4
+hbst.get_index(11)
+# 1
+```
+
 ### Priority Queue
 Priority queue is a very good data structure for inserting new values and ordering the queue according to certain priority so that when poping the more important ones get popped first even if they were inserted later.
 
@@ -295,5 +338,4 @@ pq.pop()
 pq.display()
 # The queue is Empty
 ```
-
 **More data structures will be supported soon.**

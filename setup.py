@@ -12,7 +12,8 @@ if cython_exists:
         Extension("pystack", ["stack/pystack.pyx", "stack/stack.c"]),
         Extension("pybstree", ["binary_search_tree/pybstree.pyx", "binary_search_tree/bstree.c"]),
         Extension("cpq", ["priority_queue/pqpy.pyx", "priority_queue/pq.c"]),
-        Extension("pyhash", ["hash_table/pyhash.pyx", "hash_table/hash.c"])
+        Extension("pyhash", ["hash_table/pyhash.pyx", "hash_table/hash.c"]),
+        Extension("hashbst", ["hash_table_bstree/hashbst.pyx", "hash_table_bstree/hash.c", "hash_table_bstree/bstree.c"])
     ]
 
 with open("README.md", "r", encoding="utf8") as rm:

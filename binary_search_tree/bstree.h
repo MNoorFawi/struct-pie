@@ -1,4 +1,4 @@
-#define STACK_SIZE 1000000
+#define STACK_SIZE 100000
 
 typedef struct {
 	int indx;
