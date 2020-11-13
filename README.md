@@ -2,8 +2,6 @@
 
 ![](./img/structpie-logo.jpeg)
 
-### Data Structures Pie
-
 A set of python modules for data structures. All data structures are written in **C** and imported into python using **cython**. No python code involved to make the data structure pretty fast.
 
 The idea is to extend python data structures to add more flexibility and to include more data structures that can help in different situations.
