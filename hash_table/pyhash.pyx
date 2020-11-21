@@ -102,14 +102,13 @@ cdef class HashTable:
     cpdef list search_index(self, int indx):
         cdef char **arr = <char **>malloc(STRLEN * sizeof(char *))
         cdef int l = search_indx(self.hash, arr, indx)
-        cdef list res = []
-        cdef int i
-        for i in range(l):
-            res.append(arr[i].decode())
-            free(arr[i])
-
-        free(arr)
-        return res
+        cdef int c
+        try:
+            return [i.decode() for i in arr[:l]]
+        finally:
+            for c in range(l):
+                free(arr[c])
+            free(arr)
 
     def get_index(self, val):
         cdef Tuple t = val_to_tup(val)
