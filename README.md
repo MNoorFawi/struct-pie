@@ -2,6 +2,8 @@
 
 ![](./img/structpie-logo.jpeg)
 
+[![Downloads](https://static.pepy.tech/personalized-badge/structpie?period=total&units=international_system&left_color=grey&right_color=yellowgreen&left_text=Downloads)](https://pepy.tech/project/structpie)
+
 A set of python modules for data structures. All data structures are written in **C** and imported into python using **cython**. No python code involved to make the data structure pretty fast.
 
 The idea is to extend python data structures to add more flexibility and to include more data structures that can help in different situations.
