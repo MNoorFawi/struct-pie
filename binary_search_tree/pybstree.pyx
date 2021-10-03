@@ -1,5 +1,5 @@
-from cython.operator import dereference
 from libc.stdlib cimport malloc
+from cython.operator import dereference
 
 cdef extern from "bstree.h":
 	ctypedef struct data:
